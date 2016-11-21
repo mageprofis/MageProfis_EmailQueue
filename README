@@ -1,0 +1,4 @@
+Sometimes Magento run in an Error while sending, so when your have only one Mail with an issues, the other mails,
+also will not be send.
+
+This Modul just use Events

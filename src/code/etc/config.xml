@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <MageProfis_EmailQueue>
+            <version>1.0.0.0</version>
+        </MageProfis_EmailQueue>
+    </modules>
+    <global>
+        <models>
+            <mpemailqueue>
+                <class>MageProfis_EmailQueue_Model</class>
+            </mpemailqueue>
+        </models>
+        <resources>
+            <mpemailqueue_setup>
+                <setup>
+                    <module>MageProfis_EmailQueue</module>
+                </setup>
+            </mpemailqueue_setup>
+        </resources>
+        <events>
+            <core_collection_abstract_load_before>
+                <observers>
+                    <mpemailqueue>
+                        <type>singleton</type>
+                        <class>mpemailqueue/observer</class>
+                        <method>beforeLoadEmailQueueCollection</method>
+                    </mpemailqueue>
+                </observers>
+            </core_collection_abstract_load_before>
+        </events>
+    </global>
+    <crontab>
+        <jobs>
+            <mpemailqueue_send>
+                <schedule>
+                    <cron_expr>*/10 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>mpemailqueue/observer::run</model>
+                </run>
+            </mpemailqueue_send>
+            <mpemailqueue_remove>
+                <schedule>
+                    <cron_expr>*/30 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>mpemailqueue/observer::removeOldEMails</model>
+                </run>
+            </mpemailqueue_remove>
+        </jobs>
+    </crontab>
+</config>

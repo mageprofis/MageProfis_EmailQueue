@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <MageProfis_EmailQueue>
+            <active>true</active>
+            <codePool>community</codePool>
+        </MageProfis_EmailQueue>
+    </modules>
+</config>
