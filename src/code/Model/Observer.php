@@ -32,7 +32,7 @@ class MageProfis_EmailQueue_Model_Observer
      */
     public function run()
     {
-        $limit = Mage_Core_Model_Resource_Email_Queue_Collection::MESSAGES_LIMIT_PER_CRON_RUN * 2;
+        $limit = Mage_Core_Model_Email_Queue::MESSAGES_LIMIT_PER_CRON_RUN * 2;
         $collection = Mage::getModel('core/email_queue')->getCollection()
             ->addOnlyForSendingFilter()
             ->setPageSize($limit)
