@@ -43,7 +43,11 @@ class MageProfis_EmailQueue_Model_Observer
         foreach ($collection->getAllIds() as $id)
         {
             $this->_register($id);
-            Mage::getModel('core/email_queue')->send();
+            try {
+                Mage::getModel('core/email_queue')->send();
+            } catch (Exception $e) {
+                Mage::logException($e);
+            }
             $this->_unregister();
         }
     }
